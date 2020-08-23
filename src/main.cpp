@@ -1,6 +1,6 @@
 #include <iostream>
 #include <GL/freeglut.h>
-#include "draw.h"
+#include "draw.hpp"
 
 using namespace std;
 

@@ -1,4 +1,4 @@
-#include "draw.h"
+#include "draw.hpp"
 #include <GL/freeglut.h>
 
 namespace DRAW {
