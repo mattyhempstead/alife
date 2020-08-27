@@ -1,26 +1,40 @@
 #include <iostream>
+#include <unistd.h>
 #include <GL/freeglut.h>
-#include "draw.hpp"
+#include <time.h>
+
+#include "settings.hpp"
+#include "View.hpp"
+#include "Entity.hpp"
 
 using namespace std;
 
-void display() {
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
 
-    DRAW::rect();
-
-    glFlush();
-}
 
 int main(int argc, char** argv) {
-    cout << "Hello World\n";
+    cout << "Starting Program\n";
+
+    Entity ety(3.0f,4.0f,5.0f);
+    Entity ety2(2.0f,5.0f,4.0f);
+    Entity ety3(4.0f,3.0f,6.0f);
+
+    ety.print();
+    ety2.print();
+    ety3.print();
 
     glutInit(&argc, argv);
     glutCreateWindow("OpenGL Setup Test");
-    glutInitWindowSize(320, 320);
+    glutInitWindowSize(1280, 720);
     glutInitWindowPosition(50, 50);
-    glutDisplayFunc(display);
-    glutMainLoop();
+    //glutDisplayFunc(display);
+    //glutIdleFunc(loop);
+    //glutMainLoop();
+
+    timespec ts = {0, 1000000000/FRAME_RATE};
+    while (1) {
+        nanosleep(&ts, NULL);
+        View::draw();
+    }
+
     return 0;
 }
