@@ -12,6 +12,7 @@ class View {
         static void draw();
 
         static void reshapeCallback(int w, int h);
+        static void mouseCallback(int button, int state, int x , int y);
 
         // Calculate true frame rate
         // Stores the number of frames in the current second

@@ -24,6 +24,7 @@ void View::init(int argc, char** argv) {
     glMatrixMode(GL_PROJECTION);
 
     glutReshapeFunc(View::reshapeCallback);
+    glutMouseFunc(View::mouseCallback);
     glutDisplayFunc([]{}); // Dummy function, needed for reshape callback
 
 
@@ -68,8 +69,7 @@ void View::draw() {
 }
 
 void View::reshapeCallback(int w, int h) {
-    cout << "Resizing window: " << w << " " << h << "\n";
-    
+    // cout << "Resizing window: " << w << " " << h << "\n";
     glLoadIdentity(); 
     glViewport(0,0,w,h);
     gluOrtho2D(
@@ -78,5 +78,12 @@ void View::reshapeCallback(int w, int h) {
         -h/2/zoom, 
         h/2/zoom
     );
-    cout << "Func " << glutGet(GLUT_WINDOW_WIDTH) << " " << glutGet(GLUT_WINDOW_HEIGHT) << "\n";
+}
+
+void View::mouseCallback(int button, int state, int x , int y) {
+    // cout << button << " " << state << " " << x << " " << y << "\n";
+    if ((button == 3 || button == 4) && state) {
+        zoom *= (button == 3) ? 1.0/0.95 : 0.95;
+        reshapeCallback(glutGet(GLUT_WINDOW_WIDTH), glutGet(GLUT_WINDOW_HEIGHT));
+    }
 }
