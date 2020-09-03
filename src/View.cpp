@@ -83,7 +83,7 @@ void View::reshapeCallback(int w, int h) {
 void View::mouseCallback(int button, int state, int x , int y) {
     // cout << button << " " << state << " " << x << " " << y << "\n";
     if ((button == 3 || button == 4) && state) {
-        zoom *= (button == 3) ? 1.0/0.95 : 0.95;
+        zoom *= (button == 3) ? 1.0/(1 - ZOOM_RATE) : (1 - ZOOM_RATE);
         reshapeCallback(glutGet(GLUT_WINDOW_WIDTH), glutGet(GLUT_WINDOW_HEIGHT));
     }
 }
