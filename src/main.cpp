@@ -5,10 +5,11 @@
 
 #include "settings.hpp"
 #include "View.hpp"
+#include "Sim.hpp"
+#include "Env.hpp"
 #include "Entity.hpp"
 
 using namespace std;
-
 
 
 int main(int argc, char** argv) {
@@ -22,18 +23,17 @@ int main(int argc, char** argv) {
     ety2.print();
     ety3.print();
 
-    glutInit(&argc, argv);
-    glutCreateWindow("OpenGL Setup Test");
-    glutInitWindowSize(1280, 720);
-    glutInitWindowPosition(50, 50);
-    //glutDisplayFunc(display);
-    //glutIdleFunc(loop);
-    //glutMainLoop();
+    Sim::env = Env();
+    
+
+    View::init(argc, argv);
 
     timespec ts = {0, 1000000000/FRAME_RATE};
     while (1) {
         nanosleep(&ts, NULL);
+        Sim::tick();
         View::draw();
+
     }
 
     return 0;
