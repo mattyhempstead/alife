@@ -33,7 +33,6 @@ int main(int argc, char** argv) {
         nanosleep(&ts, NULL);
         Sim::tick();
         View::draw();
-
     }
 
     return 0;

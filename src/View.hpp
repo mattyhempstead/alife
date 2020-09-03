@@ -22,6 +22,10 @@ class View {
         static int curr_frame_time;     // The second we are currently tracking
 
         static double zoom;
+
+        static int window_width;
+        static int window_height;
+
 };
 
 

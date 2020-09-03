@@ -1,6 +1,7 @@
 #include <iostream>
 #include <time.h>
 #include <GL/freeglut.h>
+#include <sstream>
 
 #include "settings.hpp"
 #include "draw.hpp"
@@ -15,6 +16,8 @@ int View::curr_frame_time = time(0);
 
 double View::zoom = 1;
 
+int View::window_width = 0;
+int View::window_height = 0;
 
 void View::init(int argc, char** argv) {
     cout << "Initialising View\n";
@@ -35,6 +38,7 @@ void View::init(int argc, char** argv) {
     // glutMainLoop();
 
     // glRectf
+    
 
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 }
@@ -46,12 +50,14 @@ void View::draw() {
         last_frame_rate = frame_no - last_frame_no;
         last_frame_no = frame_no;
         curr_frame_time = time(0);
-        cout << "FPS: " << last_frame_rate << "\n";
     }
-    //cout << "Draw " << last_frame_rate << " " << frame_no << "\n";
-
 
     glClear(GL_COLOR_BUFFER_BIT);
+
+    glLoadIdentity(); 
+    glViewport(0, 0, window_width, window_height);
+    gluOrtho2D(-window_width/2/zoom, window_width/2/zoom, -window_height/2/zoom, window_height/2/zoom);
+
 
     glBegin(GL_POLYGON);
     glColor3f(0.0f, 1.0f, 0.0f);
@@ -64,20 +70,29 @@ void View::draw() {
     DRAW::rect();
 
 
+    stringstream ss;
+    ss << "ALife" << "\n\n";
+    ss << "FPS: " << last_frame_rate << "\n";
+
+    // Draw text with the top left at (0,0)
+    glLoadIdentity();
+    gluOrtho2D(0, window_width, window_height, 0);
+    glColor4f(1.0f,1.0f,1.0f,1.0f);
+    glRasterPos2i(5, 15);
+    glutBitmapString(GLUT_BITMAP_9_BY_15, (const unsigned char*)ss.str().c_str());
+
     glFlush();
     glutMainLoopEvent();
 }
 
 void View::reshapeCallback(int w, int h) {
+    window_width = w;
+    window_height = h;
+
     // cout << "Resizing window: " << w << " " << h << "\n";
-    glLoadIdentity(); 
-    glViewport(0,0,w,h);
-    gluOrtho2D(
-        -w/2/zoom,
-        w/2/zoom, 
-        -h/2/zoom, 
-        h/2/zoom
-    );
+    // glLoadIdentity(); 
+    // glViewport(0,0,w,h);
+    // gluOrtho2D(-w/2/zoom, w/2/zoom, -h/2/zoom, h/2/zoom);
 }
 
 void View::mouseCallback(int button, int state, int x , int y) {
