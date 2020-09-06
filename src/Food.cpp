@@ -2,9 +2,10 @@
 #include <GL/freeglut.h>
 
 #include "Food.hpp"
+#include "settings.hpp"
 
 using namespace std;
 
-Food::Food() : Entity(0,0,50) {
+Food::Food(float x, float y) : Entity(x, y, FOOD_RADIUS) {
     cout << "Food created " << Food::x << " " << Food::y << " " << Food::r << endl;
 };

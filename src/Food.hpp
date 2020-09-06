@@ -5,7 +5,7 @@
 
 class Food: public Entity {
     public:
-        Food();
+        Food(float x, float y);
 
 
 };
