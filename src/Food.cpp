@@ -5,6 +5,6 @@
 
 using namespace std;
 
-Food::Food() {
-    cout << "Created food\n";
+Food::Food() : Entity(0,0,50) {
+    cout << "Food created " << Food::x << " " << Food::y << " " << Food::r << endl;
 };

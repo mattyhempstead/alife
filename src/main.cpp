@@ -15,15 +15,10 @@ using namespace std;
 int main(int argc, char** argv) {
     cout << "Starting Program\n";
 
-    Entity ety(3.0f,4.0f,5.0f);
-    Entity ety2(2.0f,5.0f,4.0f);
-    Entity ety3(4.0f,3.0f,6.0f);
+    // Entity ety(3.0f,4.0f,5.0f);
+    // ety.print();
 
-    ety.print();
-    ety2.print();
-    ety3.print();
-
-    Sim::env = Env();
+    Sim::env = new Env();
     
 
     View::init(argc, argv);
@@ -34,6 +29,8 @@ int main(int argc, char** argv) {
         Sim::tick();
         View::draw();
     }
+
+    cout << "Quitting\n";
 
     return 0;
 }

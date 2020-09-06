@@ -6,6 +6,7 @@
 #include "settings.hpp"
 #include "draw.hpp"
 #include "View.hpp"
+#include "Sim.hpp"
 
 using namespace std;
 
@@ -35,16 +36,6 @@ void View::init(int argc, char** argv) {
     glutMotionFunc(View::motion_callback);
     glutDisplayFunc([]{}); // Dummy function, needed for event callbacks
 
-
-    // glutInitWindowSize(640, 480);
-    // glutInitWindowPosition(0, 0);
-    //glutDisplayFunc(display);
-    //glutIdleFunc(loop);
-    // glutMainLoop();
-
-    // glRectf
-    
-
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 }
 
@@ -64,23 +55,13 @@ void View::draw() {
     gluOrtho2D(-window_width/2/zoom, window_width/2/zoom, -window_height/2/zoom, window_height/2/zoom);
     glTranslatef(translate_x, translate_y, 0);
 
-
-    glBegin(GL_POLYGON);
-    glColor3f(0.0f, 1.0f, 0.0f);
-    glVertex2i(-50, -50);
-    glVertex2i( 50, -50);
-    glVertex2i( 50,  50);
-    glVertex2i(-50,  50);
-    glEnd();
-
-    DRAW::rect();
-
+    Sim::env->draw();
 
     stringstream ss;
     ss << "ALife" << "\n\n";
     ss << "FPS: " << last_frame_rate << "\n";
-    ss << "Zoom: " << zoom << "\n";
-    ss << "Pos: (" << translate_x << "," << translate_y << ")\n";
+    ss << "Zoom: " << zoom << "x\n";
+    ss << "Pos: (" << translate_x << ", " << translate_y << ")\n";
 
     // Draw text with the top left at (0,0)
     glLoadIdentity();

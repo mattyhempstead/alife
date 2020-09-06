@@ -1,9 +1,11 @@
 #ifndef FOOD_H 
 #define FOOD_H
 
-class Food {
+#include "Entity.hpp"
+
+class Food: public Entity {
     public:
-    Food();
+        Food();
 
 
 };

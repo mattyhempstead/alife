@@ -8,7 +8,7 @@
  */
 class Sim {
     public:
-        static Env env;
+        static Env* env;
 
         static void tick();
 };

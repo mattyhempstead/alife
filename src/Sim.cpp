@@ -14,4 +14,4 @@ void Sim::tick() {
 
 }
 
-Env Sim::env;
+Env* Sim::env;

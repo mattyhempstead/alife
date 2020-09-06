@@ -6,9 +6,14 @@
 using namespace std;
 
 Env::Env() {
-    cout << "env created\n";
+    cout << "Env created\n";
 
     Env::rectX = 0.0;
     Env::rectY = 0.0;
 
+    Env::ety = new Food();
+}
+
+void Env::draw() {
+    ety->draw();
 }
