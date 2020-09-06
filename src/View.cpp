@@ -53,7 +53,7 @@ void View::draw() {
     glLoadIdentity(); 
     glViewport(0, 0, window_width, window_height);
     gluOrtho2D(-window_width/2/zoom, window_width/2/zoom, -window_height/2/zoom, window_height/2/zoom);
-    glTranslatef(translate_x, translate_y, 0);
+    glTranslatef(-translate_x, -translate_y, 0);
 
     Sim::env->draw();
 
@@ -92,8 +92,8 @@ void View::mouse_callback(int button, int state, int x , int y) {
 }
 
 void View::motion_callback(int x, int y) {
-    translate_x += (x - drag_prev_x)/zoom;
-    translate_y -= (y - drag_prev_y)/zoom;
+    translate_x -= (x - drag_prev_x)/zoom;
+    translate_y += (y - drag_prev_y)/zoom;
     drag_prev_x = x;
     drag_prev_y = y;
 }
